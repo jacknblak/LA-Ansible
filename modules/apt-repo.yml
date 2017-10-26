@@ -1,0 +1,13 @@
+--- # apt-repo Module
+
+- hosts        : debian
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  tasks:
+    - name           : Install package dependency for apt-repo
+      apt            : pkg=python-apt state=latest
+    - name           : Adding google repo in apt.list
+      apt_repository : repo='deb http://dl.google.com/linux/deb/ stable main non-free' state=present

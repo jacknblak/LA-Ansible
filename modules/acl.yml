@@ -1,0 +1,13 @@
+--- # apt-repo Module
+
+- hosts        : debian
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  tasks:
+    - name: Get ACL Information on the /etc/test.acl.txt remote file
+      acl: name=/etc/test.acl.txt entity=test etype=user permissions="rw" state=absent
+      register: aclinfo
+    - debug: var=aclinfo

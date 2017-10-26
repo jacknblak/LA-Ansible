@@ -1,0 +1,13 @@
+--- # mysqldb Module
+
+- hosts        : redhat
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  tasks:
+    - name : Install mysql dependencies
+      yum  : pkg=MySQL-python state=latest
+    - name    : Create a New DB
+      mysql_user : name=bob password=password123 priv=*.*:ALL state=present login_user=root login_password=password123

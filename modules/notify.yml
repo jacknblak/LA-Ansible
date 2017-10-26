@@ -1,0 +1,15 @@
+--- # Notify Module
+
+- hosts        : redhat
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  tasks:
+    - name : Install Apache web module
+      yum  : pkg=httpd state=latest
+      notify : Start httpd web service
+  handlers:
+    - name    : Start httpd web service
+      service : name=httpd state=started 
