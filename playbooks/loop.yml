@@ -1,0 +1,15 @@
+--- # loop example
+
+- hosts: redhat
+  user : user
+  become : yes
+  connection : ssh
+  gather_facts : no
+
+  tasks : 
+   - name : Add a list of users
+     user : name={{ item }} state=absent
+     with_items : 
+     - user1
+     - user2
+     - user3

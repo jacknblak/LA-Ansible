@@ -1,0 +1,11 @@
+--- # command Module
+
+- hosts        : redhat
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  tasks:
+    - name    : Run a Shell Script in Remote Dir
+      command : /home/user/test.sh

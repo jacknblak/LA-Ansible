@@ -1,0 +1,15 @@
+--- # ignore errors example
+
+- hosts        : all
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  tasks :
+    - name          : execute false command
+      command       : /bin/false
+      ignore_errors : yes
+    - name          : List /home/user dir contents
+      raw           : ls -al /home/user > temp.log
+

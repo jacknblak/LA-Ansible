@@ -1,0 +1,16 @@
+--- # Debug Module
+
+- hosts        : redhat
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  tasks:
+    - name : Install web Server
+      yum  : pkg=httpd state=latest
+    - debug : msg="httpd installed"
+    - name    : How long the command ran
+      command : uptime > uptime.log
+      register: result
+    - debug   : var=result

@@ -1,0 +1,11 @@
+--- # unarchive Module
+
+- hosts        : redhat
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  tasks:
+    - name      : unarhive the tar file in remote system.
+      unarchive : src=/home/user/prabu.tar.gz dest=/home/user copy=yes

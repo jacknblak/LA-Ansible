@@ -1,0 +1,5 @@
+- name : Install Packages
+  yum  : pkg={{ item }} state=latest
+  with_items : 
+    - telnet
+    - lynx

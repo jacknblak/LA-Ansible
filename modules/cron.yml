@@ -1,0 +1,10 @@
+--- # cron Module
+
+- hosts        : redhat
+  user         : user
+  connection   : ssh
+  gather_facts : no
+
+  tasks:
+    - name    : Run a Cron Job to list dirs
+      cron    : name='list dirs' minute="0" hour="1" job="ls -al /var/log > /home/user/cron.log"

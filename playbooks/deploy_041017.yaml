@@ -1,0 +1,13 @@
+--- # First deploy date playbook
+
+- hosts        : debian
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  tasks:
+   - name: installing telnet
+     apt : pkg=telnet state=latest update_cache=true
+   - name: verifying the installation status of lynx
+     apt : pkg=lynx state=present update_cache=true

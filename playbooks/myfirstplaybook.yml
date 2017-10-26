@@ -1,0 +1,20 @@
+--- # My First PlayBook for Ansible
+
+- hosts        : debian
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  vars :
+    playbook_version : 2.0
+  vars_files :
+    - /home/user/ansible/conf/webdefaults.yml
+    - /home/user/ansible/conf/copyright.yml
+  tasks : 
+    - name    : Update System
+      command : dpkg --configure -a
+    - name : Install Apache
+      apt  : pkg=nginx state=latest update_cache=true
+    - name : Verifying Lynx package
+      apt  : pkg=lynx state=present

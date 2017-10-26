@@ -1,0 +1,12 @@
+--- # User Module
+
+- hosts        : all
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  tasks:
+    - name : Create a new use 'tst'
+      user : name=tst comment='tst user' shell=/bin/bash group=root
+    - debug : msg="New User Created"

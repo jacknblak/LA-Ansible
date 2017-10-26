@@ -1,0 +1,14 @@
+--- # local example
+
+- hosts        : all
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  tasks : 
+   - name    : Run Uptime command
+     raw     : uptime >> /home/user/uptime.log
+   - name    : List /var dir
+     raw     : ls -al /var >> /home/user/dir.list
+     run_once: true

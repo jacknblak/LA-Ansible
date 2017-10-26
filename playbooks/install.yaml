@@ -1,0 +1,36 @@
+- hosts        : all
+  user         : user
+  become       : yes
+  gather_facts : no
+  connection   : ssh
+  vars :
+   author_name    : test 
+   control_server : localhost
+   web_root       : /var/www/html
+  vars_files: 
+  - vars.yaml 
+  vars_prompt:
+  - name   : pkg_name
+    prompt : Which Package to install?
+  tasks:
+  - name     : Starting Timestamp
+    command  : date
+    register : start
+  - debug    : var=start 
+  - name     : Installing telnet & lynx package
+    yum      : pkg={{ pkg_name }} state=installed update_cache=true
+    async    : 300
+    poll     : 3
+  - name     : Installing httpd service
+    action   : yum name=httpd state=latest
+    async    : 300
+    poll     : 3
+    notify   : Restart httpd
+  - name     : End Timestamp
+    command  : date
+    register : end
+  - debug    : var=end
+  handlers :
+  - name   : Restart httpd
+    action : service name=httpd state=restarted
+  

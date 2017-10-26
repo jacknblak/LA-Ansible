@@ -1,0 +1,11 @@
+--- # Fetch Module
+
+- hosts        : redhat
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : yes
+
+  tasks:
+    - name : Copy File to Redhat hosts
+      fetch : src=/etc/hosts dest=/home/user/prefix-{{ ansible_hostname }} flat=yes

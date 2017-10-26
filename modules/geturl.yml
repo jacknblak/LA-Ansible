@@ -1,0 +1,11 @@
+--- # GetURL Module
+
+- hosts        : redhat
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  tasks:
+    - name : Get URL from the site
+      get_url : url="" dest=/home/user mode=0644

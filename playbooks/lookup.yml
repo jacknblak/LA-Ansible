@@ -1,0 +1,14 @@
+--- # lookup example
+
+- hosts: redhat
+  user : user
+#  become : yes
+  connection : ssh
+  gather_facts : no
+
+  tasks : 
+   - debug    : msg="{{ lookup('env', 'PATH') }} is the value listed"
+   - name     : Display HOME Varible
+     raw      : echo $HOME
+     register : Result
+   - debug    : var=Result

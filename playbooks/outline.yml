@@ -1,0 +1,28 @@
+--- # outline errors example
+
+- hosts        : '{{ hosts }}'
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  tasks :
+    - name          : execute date command
+      raw           : date
+      register      : start_time
+    - debug         : var=start_time
+    - name          : Install Apache web service
+      yum           : pkg={{ pkg }} state=latest
+      notify        : Start Apache Service
+    - name          : Verify the service is running
+      raw           : systemctl status httpd
+      register      : result
+    - debug         : var=result
+    - name          : execute date command
+      raw           : date
+      register      : end_time
+    - debug         : var=end_time
+
+  handlers :
+    - name          : Start Apache Service
+      service       : name=httpd state=restarted

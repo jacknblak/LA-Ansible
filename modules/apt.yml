@@ -1,0 +1,19 @@
+--- # apt Module
+
+- hosts        : debian
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  tasks:
+    - name : dpkg configure
+      shell: dpkg --configure -a
+#    - name : APT Update
+#      apt  : pkg=* state=latest
+    - name : Install Apache
+      apt  : pkg=apache2 state=present
+      notify : Restart Apache2
+  handlers :
+    - name    : Restart Apache2
+      service : name=apache2 state=restarted

@@ -1,0 +1,11 @@
+--- # Copy Module
+
+- hosts        : redhat
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  tasks:
+    - name : Copy File to Redhat hosts
+      copy : src=apt.yml dest=/home/user

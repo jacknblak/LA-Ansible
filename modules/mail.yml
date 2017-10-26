@@ -1,0 +1,16 @@
+--- # Mail Module
+
+- hosts        : redhat
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : yes
+
+  tasks:
+    - name : Send email
+      mail :
+        host = localhost
+        port = 25
+        to   = test
+        subject="our host finished deploying"
+        body = 'out system {{ ansible_hostname }} finished deploying'

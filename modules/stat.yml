@@ -1,0 +1,16 @@
+--- # Stat Module
+
+- hosts        : redhat
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  vars:
+    - playbook_version: 2.0
+  tasks:
+    - name : Stat content
+      stat : path=/home/user/ss
+      register: p
+    - debug : msg="directory exists"
+      when  : p.stat.isdir is defined and p.stat.isdir

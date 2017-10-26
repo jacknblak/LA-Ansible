@@ -1,0 +1,11 @@
+--- # Yum Module
+
+- hosts        : redhat
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  tasks:
+    - name : APT Update
+      yum  : pkg=* state=latest

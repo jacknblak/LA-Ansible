@@ -1,0 +1,13 @@
+--- # include example
+
+- hosts        : redhat
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  tasks :
+    - include : plays/install.yml
+    - name    : Query Telnet Package
+      raw     : yum list installed | grep telnet > /home/user/includes.log
+

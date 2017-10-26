@@ -1,0 +1,17 @@
+--- # Pause Module
+
+- hosts        : redhat
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  tasks:
+    - name : Install httpd
+      yum  : pkg=httpd state=latest
+    - name : Pausing
+      pause: 
+        prompt : Press Enter to continue ...
+
+    - name : Verify lynx is installed
+      yum  : pkg=lynx state=present

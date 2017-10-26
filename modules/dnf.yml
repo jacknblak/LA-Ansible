@@ -1,0 +1,11 @@
+--- # dnf Module
+
+- hosts        : redhat
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  tasks:
+    - name : dnf module
+      dnf  : name="@development.tools" state=present

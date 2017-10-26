@@ -1,0 +1,22 @@
+--- # conditions example
+
+- hosts: debian
+  user : user
+  become : yes
+  connection : ssh
+  gather_facts : yes
+
+  tasks : 
+   - name : Install Apache service
+     apt  : name={{ item }} state=latest
+     with_items : 
+     - apache2
+     - nginx
+     notify : Restart Apache Service
+     when   : ansible_os_family == 'Debian'
+  handlers :
+   - name     : Restart Apache Service
+     service  : name={{ item }} state=restarted
+     with_items : 
+     - apache2
+     - nginx

@@ -1,0 +1,11 @@
+--- # at Module
+
+- hosts        : redhat
+  user         : user
+  become       : yes
+  connection   : ssh
+  gather_facts : no
+
+  tasks:
+    - name    : Run a AT command
+      at      : command="ls -al /var/log > /home/user/cron.log" state=present

@@ -1,0 +1,13 @@
+--- # local example
+
+- hosts        : local
+  user         : user
+  become       : yes
+  connection   : local
+  gather_facts : no
+
+  tasks : 
+   - name : Install Telnet Package
+     yum  : name={{ item }} state=latest
+     with_items : 
+     - telnet
